@@ -20,6 +20,7 @@ public class AppConfig {
 		employeeList.add(new Employee("2","Hacı Bayram","Akkurt"));
 		employeeList.add(new Employee("3","Turgut Taha","Yılmaz"));
 		employeeList.add(new Employee("4","Uğur","Nusretoğlu"));
+		employeeList.add(new Employee("4","Uğur","Küçük"));
 
 		return employeeList;
 		
