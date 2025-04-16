@@ -7,7 +7,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 import com.zeynalabidin.model.Employee;
+import com.zeynalabidin.model.UpdateEmployeeRequest;
 
 @Repository
 public class EmployeeRepository {
@@ -53,6 +55,56 @@ public class EmployeeRepository {
 			}
 		}
 		return employeeWithParams;
+	}
+
+	public Employee saveEmployee(Employee newEmployee) {
+		employeeList.add(newEmployee);
+
+		return newEmployee;
+	}
+
+	public boolean deleteEmployee(String id) {
+
+		Employee deleteEmployee = null;
+		for (Employee employee : employeeList) {
+			if (id.equals(employee.getId())) {
+				deleteEmployee = employee;
+				break;
+			}
+		}
+		if (deleteEmployee == null) {
+			return false;
+		}
+		employeeList.remove(deleteEmployee);
+		return true;
+	}
+
+	private Employee findEmployeeById(String id) {
+		Employee findEmployee = null;
+		for (Employee employee : employeeList) {
+			if (employee.getId().equals(id)) {
+
+				return employee;
+			}
+		}
+		return findEmployee;
+	}
+
+	public Employee updateEmployee(String id, UpdateEmployeeRequest request) {
+		Employee findEmployee = findEmployeeById(id);
+		if (findEmployee != null) {
+			deleteEmployee(id);
+
+			Employee uptadetEmployee = new Employee();
+
+			uptadetEmployee.setId(id);
+			uptadetEmployee.setName(request.getFirstName());
+			uptadetEmployee.setName(request.getLastName());
+			employeeList.add(uptadetEmployee);
+
+			return uptadetEmployee;
+		}
+		return null;
 	}
 
 }

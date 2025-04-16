@@ -3,13 +3,18 @@ package com.zeynalabidin.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zeynalabidin.model.Employee;
+import com.zeynalabidin.model.UpdateEmployeeRequest;
 import com.zeynalabidin.services.EmployeeService;
 
 @RestController
@@ -37,5 +42,22 @@ public class RestEmployeeController {
 		System.out.println(firstName + " " + lastName);
 		return employeeService.getEmployeeWithParams(firstName, lastName);
 	}
+	
+	@PostMapping(path="/save-employee")
+	public Employee saveEmployee(@RequestBody Employee newEmployee ) {
+		return employeeService.saveEmployee(newEmployee);
+				
+	}
+	@DeleteMapping(path = "/delete-employee/{id}")
+	public boolean deleteEmployee(@PathVariable(name = "id")String id) {
+		return employeeService.deleteEmployee(id);
+	}
+	
+	@PutMapping(path = "/update-employee/{id}")
+	public Employee updatEmployee(@PathVariable(name = "id")String id,@RequestBody UpdateEmployeeRequest request) {
+		return employeeService.updateEmployee(id, request);
+	}
+	
+	
 
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zeynalabidin.model.Employee;
+import com.zeynalabidin.model.UpdateEmployeeRequest;
 import com.zeynalabidin.repository.EmployeeRepository;
 
 @Service
@@ -30,4 +31,17 @@ public class EmployeeService {
 		return employeeRepository.getEmployeeWithParams(firstName, lastName);
 	}
 	
+	
+	public Employee saveEmployee(Employee newEmployee) {
+		return employeeRepository.saveEmployee(newEmployee);
+	}
+	
+	
+	public boolean deleteEmployee(String  id) {
+		return employeeRepository.deleteEmployee(id);
+	}
+	
+	public Employee updateEmployee(String id,UpdateEmployeeRequest request) {
+		return employeeRepository.updateEmployee(id, request);
+	}
 }
