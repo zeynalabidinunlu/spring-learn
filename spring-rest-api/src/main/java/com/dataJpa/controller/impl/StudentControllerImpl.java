@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dataJpa.controller.IStudentController;
+import com.dataJpa.dto.DtoStudent;
+import com.dataJpa.dto.DtoStudentIU;
 import com.dataJpa.entites.Student;
 import com.dataJpa.services.IStudentService;
 
@@ -25,19 +27,19 @@ public class StudentControllerImpl implements IStudentController {
 
 	@PostMapping(path = "/save")
 	@Override
-	public Student saveStudent(@RequestBody Student student) {
-		return studentService.saveStudent(student);
+	public DtoStudent saveStudent(@RequestBody DtoStudentIU dtoStudentIU) {
+		return studentService.saveStudent(dtoStudentIU);
 	}
 
 	@GetMapping(path = "/list")
 	@Override
-	public List<Student> getAllStudents() {
+	public List<DtoStudent> getAllStudents() {
 
 		return studentService.getAllStudents();
 	}
 
 	@GetMapping(path = "/list/{id}")
-	public Student getStudentById(@PathVariable(name = "id") Integer id) {
+	public DtoStudent getStudentById(@PathVariable(name = "id") Integer id) {
 
 		return studentService.getStudentById(id);
 	}
@@ -53,9 +55,9 @@ public class StudentControllerImpl implements IStudentController {
 	
 	@PutMapping(path = "/update/{id}")
 	@Override
-	public Student updateStudent(@PathVariable(name = "id") Integer id,@RequestBody Student updaStudent) {
+	public DtoStudent updateStudent(@PathVariable(name = "id") Integer id,@RequestBody DtoStudentIU dtoStudentIU) {
 			
-	return	studentService.updateStudent(id, updaStudent);
+	return	studentService.updateStudent(id, dtoStudentIU);
 		
 	
 	}
